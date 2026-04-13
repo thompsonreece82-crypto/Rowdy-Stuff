@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HOWDY WE'RE ROWDY </title>
+    <title>howdy we are rowdy</title>
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Permanent+Marker&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -11,42 +11,41 @@
         :root {
             --pink: #ff1493;
             --blue: #1e3a8a;
-            --dark-pink: #c71585;
             --cream: #f5f0e6;
-            --glass: rgba(0, 0, 0, 0.75);
+            --glass: rgba(0, 0, 0, 0.85);
         }
 
         body {
-            background: var(--cream);
-            /* This looks for a file named background.jpg in your GitHub repo */
-            background-image: url('background.jpg'); 
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
+            background-color: #000;
             min-height: 100vh;
             overflow-x: hidden;
             font-family: 'Anton', sans-serif;
             cursor: crosshair;
+            color: white;
         }
 
-        /* Overlay for readability */
-        .bg-overlay {
+        /* HALFTONE BACKGROUND EFFECT */
+        .bg-halftone {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Darkened slightly for better contrast */
             z-index: -2;
+            /* Update 'background.jpg' to your image file name when uploaded */
+            background-image: url('background.jpg'); 
+            background-size: cover;
+            background-position: center;
+            filter: grayscale(100%) contrast(150%);
         }
 
-        /* Moving slash decor */
-        .bg-pattern {
-            position: fixed;
+        .bg-halftone::after {
+            content: '';
+            position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1;
-            background: repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(255, 20, 147, 0.05) 50px, rgba(255, 20, 147, 0.05) 100px);
-            animation: patternShift 20s linear infinite;
+            /* The Halftone Dot Pattern */
+            background-image: radial-gradient(circle, #000 20%, transparent 20%);
+            background-size: 4px 4px;
+            opacity: 0.4;
+            pointer-events: none;
         }
-
-        @keyframes patternShift { 0% { transform: translateX(0) translateY(0); } 100% { transform: translateX(100px) translateY(100px); } }
 
         /* Header */
         .header { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 40px; z-index: 100; }
@@ -55,40 +54,39 @@
             font-size: 2.2rem; 
             color: white; 
             text-transform: uppercase; 
-            letter-spacing: 4px;
-            text-shadow: 3px 3px 0px var(--pink);
+            letter-spacing: 2px;
+            text-shadow: 3px 3px 0px #000;
         }
 
-        /* Vertical Navigation */
+        /* Navigation */
         .menu-container { position: fixed; left: 60px; top: 50%; transform: translateY(-50%); z-index: 50; }
         .menu-item {
             position: relative; margin: 25px 0; padding: 10px 40px;
             font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
             color: white; text-decoration: none; display: block;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            transition: 0.3s ease;
+            text-shadow: 2px 2px 0px #000;
         }
-        .menu-item:hover { color: white; transform: translateX(25px) scale(1.1); }
+        .menu-item:hover { transform: translateX(20px); color: #ccc; }
         .menu-item::before { 
             content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 80%; 
-            background: var(--pink); transform: translateY(-50%) skewX(-15deg); 
+            background: white; transform: translateY(-50%) skewX(-15deg); 
             transition: 0.4s; z-index: -1; 
         }
-        .menu-item:hover::before { width: 110%; }
+        .menu-item:hover::before { width: 110%; background: black; border: 2px solid white; }
 
         .selection-bar { 
             position: fixed; left: 0; width: 10px; height: 60px; 
-            background: var(--pink); z-index: 60; 
+            background: white; z-index: 60; 
             transition: top 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
-            box-shadow: 0 0 20px var(--pink); 
         }
 
         /* Content Panels */
         .content-panel {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, rgba(10, 20, 50, 0.98) 0%, rgba(100, 10, 60, 0.98) 100%);
+            background: #000;
             z-index: 200; transform: translateX(100%); 
-            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+            transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
             overflow-y: auto; padding: 100px 10% 60px 10%;
         }
         .content-panel.active { transform: translateX(0); }
@@ -102,60 +100,52 @@
         .gothic-title {
             font-family: 'UnifrakturMaguntia', serif;
             font-style: italic; font-size: clamp(4rem, 10vw, 9rem);
-            color: var(--pink); text-shadow: 5px 5px 0px white;
+            color: white; text-shadow: 4px 4px 0px #333;
             margin-bottom: 30px; text-align: center;
         }
-
-        /* Carousel */
         .carousel-wrapper {
-            width: 100%; overflow: hidden; position: relative;
-            border: 6px solid white; margin-bottom: 40px; background: #000;
+            width: 100%; overflow: hidden; border: 4px solid white; margin-bottom: 40px;
         }
-        .carousel-track {
-            display: flex; transition: transform 0.5s ease-in-out;
-        }
-        .carousel-track img {
-            width: 100%; flex-shrink: 0; height: 500px; object-fit: cover;
-        }
+        .carousel-track { display: flex; transition: transform 0.5s ease-in-out; }
+        .carousel-track img { width: 100%; flex-shrink: 0; height: 500px; object-fit: cover; filter: grayscale(100%); }
 
         .bio-box {
-            background: var(--glass); padding: 40px; border-top: 5px solid var(--pink);
+            background: #111; padding: 40px; border: 1px solid #444;
             color: white; font-family: 'Bebas Neue'; font-size: 1.5rem;
             line-height: 1.7; text-align: justify; margin-bottom: 40px;
-            letter-spacing: 1px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         /* CONTACT PAGE STYLING */
         .flashy-contact {
-            background: white; color: var(--blue); padding: 50px;
-            border: 8px solid var(--pink); transform: skewX(-3deg);
-            box-shadow: 20px 20px 0px var(--blue); text-align: center;
+            background: white; color: black; padding: 50px;
+            border: 10px solid black; transform: skewX(-2deg);
+            box-shadow: 15px 15px 0px #555; text-align: center;
             margin: 40px auto; max-width: 800px;
         }
         .insta-btn {
-            display: inline-block; background: linear-gradient(45deg, #f09433, #e31c5f, #d1208a, #8a3ab9, #4c5fd7);
-            color: white; padding: 20px 40px; text-decoration: none; 
-            font-size: 1.8rem; border-radius: 10px; transition: 0.3s;
-            font-family: 'Bebas Neue'; margin-top: 20px;
+            display: inline-block; background: black; color: white;
+            padding: 20px 40px; text-decoration: none; border: 2px solid white;
+            font-size: 1.8rem; transition: 0.3s; font-family: 'Bebas Neue';
         }
-        .insta-btn:hover { transform: scale(1.1) rotate(2deg); box-shadow: 0 0 30px var(--pink); }
+        .insta-btn:hover { background: white; color: black; }
 
-        /* MOUSE TRAIL */
-        .trail { position: fixed; width: 10px; height: 10px; background: var(--pink); border-radius: 50%; pointer-events: none; transition: 0.4s; z-index: 9999; }
+        /* GIGS LIST STYLING (BreakingTunes) */
+        #bt-gigs-container { background: #111; padding: 20px; border: 1px solid white; color: white; }
+        
+        /* Mouse Trail */
+        .trail { position: fixed; width: 8px; height: 8px; background: white; border-radius: 50%; pointer-events: none; transition: 0.4s; z-index: 9999; }
 
         @media (max-width: 768px) {
             .menu-container { left: 20px; }
-            .menu-item { font-size: 2rem; }
             .carousel-track img { height: 300px; }
-            .header { padding: 15px; }
+            .gothic-title { font-size: 4rem; }
         }
     </style>
 </head>
 <body>
-    <div class="bg-overlay"></div>
-    <div class="bg-pattern"></div>
+    <div class="bg-halftone"></div>
 
-    <header class="header"><div class="logo">Phantom Nexus</div></header>
+    <header class="header"><div class="logo">howdy we're rowdy</div></header>
     <div class="selection-bar" id="selectionBar"></div>
 
     <nav class="menu-container">
@@ -171,36 +161,38 @@
         
         <div class="carousel-wrapper">
             <div class="carousel-track" id="carouselTrack">
-                <img src="band1.jpg" alt="Rowdy Live 1">
-                <img src="band2.jpg" alt="Rowdy Live 2">
-                <img src="band3.jpg" alt="Rowdy Live 3">
+                <img src="band1.jpg" alt="1">
+                <img src="band2.jpg" alt="2">
+                <img src="band3.jpg" alt="3">
             </div>
         </div>
 
         <div class="bio-box">
             Hailing from Derry, Northern Ireland, <strong>Rowdy</strong> are a four-piece post-rock/alternative rock outfit carving out a sound that bridges raw intensity with atmospheric depth. The band blend heavy, driving rhythms with soaring melodies and cinematic textures.
             <br><br>
-            Drawing influence from the grit and emotion of 70s rock legends like the B-52’s while weaving in the dreamy, modern touches of artists such as Hers and Sorry, Rowdy’s music feels both nostalgic and forward-looking. Their debut singles, <strong>“Rolling”</strong> and <strong>“Tatooine”</strong>, have already made waves locally, showcasing the band’s ability to shift seamlessly between brooding atmospheres and explosive energy.
+            Drawing influence from the grit and emotion of 70s rock legends like the B-52’s while weaving in the dreamy, modern touches of artists such as Hers and Sorry, Rowdy’s music feels both nostalgic and forward-looking. Their debut singles, “Rolling” and “Tatooine”, have already made waves locally, showcasing the band’s ability to shift seamlessly between brooding atmospheres and explosive energy.
             <br><br>
             Rowdy have headlined multiple shows across Derry, including the Rock for Pride fundraiser, and continue to build momentum with their commanding live performances. With their first full-length album currently in the works and plans to tour in the coming year, Rowdy are poised to establish themselves as one of the most exciting emerging acts from Northern Ireland’s alternative scene.
         </div>
 
-        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5uC6b5NisI873zXGskZq7o?utm_source=generator" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="http://googleusercontent.com/spotify.com/5" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
     <div class="content-panel" id="panel-contact">
         <button class="close-btn" onclick="closePanel('contact')">✕</button>
         <div class="flashy-contact">
-            <h2>GET IN TOUCH</h2>
-            <p style="font-size: 1.8rem; margin: 20px 0;">Email: <span style="color: var(--pink)">reecethompsonbusiness@outlook.com</span></p>
-            <a href="https://www.instagram.com/r0wdy_band/" target="_blank" class="insta-btn">FOLLOW @R0WDY_BAND</a>
+            <h2>CONTACT INFO</h2>
+            <p style="font-size: 1.8rem; margin: 20px 0;">Email: reecethompsonbusiness@outlook.com</p>
+            <a href="https://www.instagram.com/r0wdy_band/" target="_blank" class="insta-btn">INSTAGRAM</a>
         </div>
-        <p style="text-align: center; color: white; font-family: 'Bebas Neue'; font-size: 1.5rem; opacity: 0.7;">This section is currently under development</p>
     </div>
 
     <div class="content-panel" id="panel-events">
         <button class="close-btn" onclick="closePanel('events')">✕</button>
-        <h2 style="font-size: 5rem; color: white; text-align: center; font-family: 'Bebas Neue';">currently under development</h2>
+        <h2 style="font-size: 4rem; text-align: center; font-family: 'Bebas Neue'; margin-bottom: 30px;">Upcoming Events</h2>
+        <div id="bt-gigs-container">
+            <script src="https://www.breakingtunes.com/rowdy/gigs.js" type="text/javascript" charset="utf-8"></script>
+        </div>
     </div>
 
     <div class="content-panel" id="panel-else">
@@ -214,7 +206,6 @@
         const track = document.getElementById('carouselTrack');
         let index = 0;
 
-        // Selection Bar Logic
         function updateSelectionBar(item) {
             const rect = item.getBoundingClientRect();
             selectionBar.style.top = (rect.top + rect.height / 2 - 30) + 'px';
@@ -228,25 +219,22 @@
             });
         });
 
-        // Panel Controls
         function openPanel(section) { 
             document.getElementById('panel-' + section).classList.add('active'); 
-            document.body.style.overflow = 'hidden'; // Stop scrolling main page
+            document.body.style.overflow = 'hidden';
         }
         function closePanel(section) { 
             document.getElementById('panel-' + section).classList.remove('active'); 
             document.body.style.overflow = 'auto'; 
         }
 
-        // Auto Carousel Logic
         function moveCarousel() {
             index++;
-            if (index > 2) index = 0; // Cycles through 3 images
+            if (index > 2) index = 0;
             track.style.transform = `translateX(-${index * 100}%)`;
         }
-        setInterval(moveCarousel, 3000); // Change image every 3 seconds
+        setInterval(moveCarousel, 3000);
 
-        // Mouse Trail
         document.addEventListener('mousemove', (e) => {
             const trail = document.createElement('div');
             trail.className = 'trail';
@@ -257,7 +245,6 @@
             setTimeout(() => trail.remove(), 400);
         });
 
-        // Init
         updateSelectionBar(menuItems[0]);
     </script>
 </body>
