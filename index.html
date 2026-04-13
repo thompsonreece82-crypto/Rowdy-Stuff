@@ -3,228 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHANTOM NEXUS</title>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <title>HOWDY WE'RE ROWDY </title>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Permanent+Marker&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
             --pink: #ff1493;
             --blue: #1e3a8a;
-            --light-blue: #3b82f6;
             --dark-pink: #c71585;
             --cream: #f5f0e6;
+            --glass: rgba(0, 0, 0, 0.75);
         }
 
         body {
             background: var(--cream);
+            /* This looks for a file named background.jpg in your GitHub repo */
+            background-image: url('background.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
             min-height: 100vh;
             overflow-x: hidden;
             font-family: 'Anton', sans-serif;
             cursor: crosshair;
         }
 
-        /* Animated Background Pattern */
+        /* Overlay for readability */
+        .bg-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.4); /* Darkened slightly for better contrast */
+            z-index: -2;
+        }
+
+        /* Moving slash decor */
         .bg-pattern {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -2;
-            background: 
-                repeating-linear-gradient(
-                    45deg,
-                    transparent,
-                    transparent 50px,
-                    rgba(30, 58, 138, 0.03) 50px,
-                    rgba(30, 58, 138, 0.03) 100px
-                );
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(255, 20, 147, 0.05) 50px, rgba(255, 20, 147, 0.05) 100px);
             animation: patternShift 20s linear infinite;
         }
 
-        @keyframes patternShift {
-            0% { transform: translateX(0) translateY(0); }
-            100% { transform: translateX(100px) translateY(100px); }
-        }
-
-        /* Diagonal Slashes */
-        .slash-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .slash {
-            position: absolute;
-            background: var(--pink);
-            transform: rotate(-15deg);
-            animation: slashPulse 3s ease-in-out infinite;
-        }
-
-        .slash-1 { width: 8px; height: 200%; left: 10%; top: -50%; opacity: 0.1; animation-delay: 0s; }
-        .slash-2 { width: 15px; height: 200%; left: 30%; top: -50%; background: var(--blue); opacity: 0.08; animation-delay: 0.5s; }
-        .slash-3 { width: 5px; height: 200%; right: 20%; top: -50%; opacity: 0.15; animation-delay: 1s; }
-        .slash-4 { width: 20px; height: 200%; right: 5%; top: -50%; background: var(--blue); opacity: 0.05; animation-delay: 1.5s; }
-
-        @keyframes slashPulse {
-            0%, 100% { opacity: 0.05; }
-            50% { opacity: 0.15; }
-        }
+        @keyframes patternShift { 0% { transform: translateX(0) translateY(0); } 100% { transform: translateX(100px) translateY(100px); } }
 
         /* Header */
-        .header {
-            position: fixed;
-            top: 0; left: 0; width: 100%;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 100;
-            mix-blend-mode: difference;
-        }
-
-        .logo {
-            font-family: 'Permanent Marker', cursive;
-            font-size: 2rem;
-            color: white;
-            text-transform: uppercase;
+        .header { position: fixed; top: 0; left: 0; width: 100%; padding: 25px 40px; z-index: 100; }
+        .logo { 
+            font-family: 'Permanent Marker', cursive; 
+            font-size: 2.2rem; 
+            color: white; 
+            text-transform: uppercase; 
             letter-spacing: 4px;
-            position: relative;
+            text-shadow: 3px 3px 0px var(--pink);
         }
 
-        .logo::after {
-            content: '';
-            position: absolute;
-            bottom: -5px; left: 0; width: 100%; height: 3px;
-            background: var(--pink);
-            transform: skewX(-20deg);
-        }
-
-        /* Menu Container */
-        .menu-container {
-            position: fixed;
-            left: 60px;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 50;
-        }
-
+        /* Vertical Navigation */
+        .menu-container { position: fixed; left: 60px; top: 50%; transform: translateY(-50%); z-index: 50; }
         .menu-item {
-            position: relative;
-            margin: 20px 0;
-            padding: 15px 40px;
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2.8rem;
-            letter-spacing: 3px;
-            color: var(--blue);
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            text-transform: uppercase;
-            transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            transform-origin: left center;
-            display: block;
-            text-align: left;
-            text-decoration: none;
+            position: relative; margin: 25px 0; padding: 10px 40px;
+            font-family: 'Bebas Neue', sans-serif; font-size: 3rem;
+            color: white; text-decoration: none; display: block;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
         }
-
-        .menu-item::before {
-            content: '';
-            position: absolute;
-            left: 0; top: 50%; width: 0; height: 70%;
-            background: var(--pink);
-            transform: translateY(-50%) skewX(-15deg);
-            transition: all 0.4s ease;
-            z-index: -1;
+        .menu-item:hover { color: white; transform: translateX(25px) scale(1.1); }
+        .menu-item::before { 
+            content: ''; position: absolute; left: 0; top: 50%; width: 0; height: 80%; 
+            background: var(--pink); transform: translateY(-50%) skewX(-15deg); 
+            transition: 0.4s; z-index: -1; 
         }
+        .menu-item:hover::before { width: 110%; }
 
-        .menu-item:hover {
-            color: white;
-            transform: translateX(20px) skewX(-5deg);
-            text-shadow: 3px 3px 0 var(--blue);
-        }
-
-        .menu-item:hover::before { width: 120%; }
-
-        /* Selection Indicator */
-        .selection-bar {
-            position: fixed;
-            left: 0; top: 0; width: 8px; height: 60px;
-            background: var(--pink);
-            z-index: 60;
-            transition: top 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            box-shadow: 0 0 20px var(--pink);
+        .selection-bar { 
+            position: fixed; left: 0; width: 10px; height: 60px; 
+            background: var(--pink); z-index: 60; 
+            transition: top 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55); 
+            box-shadow: 0 0 20px var(--pink); 
         }
 
         /* Content Panels */
         .content-panel {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, var(--blue) 0%, var(--dark-pink) 100%);
-            z-index: 200;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transform: translateX(100%);
-            transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(10, 20, 50, 0.98) 0%, rgba(100, 10, 60, 0.98) 100%);
+            z-index: 200; transform: translateX(100%); 
+            transition: transform 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+            overflow-y: auto; padding: 100px 10% 60px 10%;
         }
-
         .content-panel.active { transform: translateX(0); }
-
-        .content-panel-inner { text-align: center; color: white; padding: 20px; }
-        .content-panel h2 { font-family: 'Permanent Marker', cursive; font-size: 5rem; margin-bottom: 20px; text-transform: uppercase; }
-        .content-panel p { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 2px; opacity: 0.9; }
-
-        .close-btn {
-            position: absolute;
-            top: 40px; right: 40px;
-            font-size: 3rem; color: white;
-            background: none; border: none; cursor: pointer;
-            font-family: 'Anton', sans-serif;
-            transition: transform 0.3s ease;
+        .close-btn { 
+            position: fixed; top: 40px; right: 40px; font-size: 3.5rem; 
+            color: white; background: none; border: none; cursor: pointer; 
+            z-index: 201; font-family: 'Anton';
         }
 
-        .close-btn:hover { transform: rotate(90deg) scale(1.2); }
-
-        /* Glitch Decor */
-        .glitch-text {
-            position: fixed;
-            top: 30%; right: 100px;
-            font-family: 'Permanent Marker', cursive;
-            font-size: 5rem;
-            color: transparent;
-            -webkit-text-stroke: 2px var(--blue);
-            transform: rotate(-90deg);
-            opacity: 0.2;
+        /* ROWDY PAGE STYLING */
+        .gothic-title {
+            font-family: 'UnifrakturMaguntia', serif;
+            font-style: italic; font-size: clamp(4rem, 10vw, 9rem);
+            color: var(--pink); text-shadow: 5px 5px 0px white;
+            margin-bottom: 30px; text-align: center;
         }
 
-        /* Mobile Adjustments */
+        /* Carousel */
+        .carousel-wrapper {
+            width: 100%; overflow: hidden; position: relative;
+            border: 6px solid white; margin-bottom: 40px; background: #000;
+        }
+        .carousel-track {
+            display: flex; transition: transform 0.5s ease-in-out;
+        }
+        .carousel-track img {
+            width: 100%; flex-shrink: 0; height: 500px; object-fit: cover;
+        }
+
+        .bio-box {
+            background: var(--glass); padding: 40px; border-top: 5px solid var(--pink);
+            color: white; font-family: 'Bebas Neue'; font-size: 1.5rem;
+            line-height: 1.7; text-align: justify; margin-bottom: 40px;
+            letter-spacing: 1px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* CONTACT PAGE STYLING */
+        .flashy-contact {
+            background: white; color: var(--blue); padding: 50px;
+            border: 8px solid var(--pink); transform: skewX(-3deg);
+            box-shadow: 20px 20px 0px var(--blue); text-align: center;
+            margin: 40px auto; max-width: 800px;
+        }
+        .insta-btn {
+            display: inline-block; background: linear-gradient(45deg, #f09433, #e31c5f, #d1208a, #8a3ab9, #4c5fd7);
+            color: white; padding: 20px 40px; text-decoration: none; 
+            font-size: 1.8rem; border-radius: 10px; transition: 0.3s;
+            font-family: 'Bebas Neue'; margin-top: 20px;
+        }
+        .insta-btn:hover { transform: scale(1.1) rotate(2deg); box-shadow: 0 0 30px var(--pink); }
+
+        /* MOUSE TRAIL */
+        .trail { position: fixed; width: 10px; height: 10px; background: var(--pink); border-radius: 50%; pointer-events: none; transition: 0.4s; z-index: 9999; }
+
         @media (max-width: 768px) {
             .menu-container { left: 20px; }
-            .menu-item { font-size: 1.8rem; padding: 10px 25px; }
-            .content-panel h2 { font-size: 3rem; }
-            .glitch-text { display: none; }
+            .menu-item { font-size: 2rem; }
+            .carousel-track img { height: 300px; }
+            .header { padding: 15px; }
         }
     </style>
 </head>
 <body>
+    <div class="bg-overlay"></div>
     <div class="bg-pattern"></div>
-    <div class="slash-overlay"><div class="slash slash-1"></div><div class="slash slash-2"></div><div class="slash slash-3"></div><div class="slash slash-4"></div></div>
 
-    <header class="header">
-        <div class="logo">Phantom Nexus</div>
-    </header>
-
+    <header class="header"><div class="logo">Phantom Nexus</div></header>
     <div class="selection-bar" id="selectionBar"></div>
 
     <nav class="menu-container">
@@ -234,44 +165,56 @@
         <a href="#" class="menu-item" data-section="else">Everything Else</a>
     </nav>
 
-    <div class="glitch-text">NEXUS</div>
-
     <div class="content-panel" id="panel-rowdy">
         <button class="close-btn" onclick="closePanel('rowdy')">✕</button>
-        <div class="content-panel-inner">
-            <h2>Rowdy</h2>
-            <p>Unleash the chaos. Pure energy, no limits.</p>
+        <h1 class="gothic-title">rowdy</h1>
+        
+        <div class="carousel-wrapper">
+            <div class="carousel-track" id="carouselTrack">
+                <img src="band1.jpg" alt="Rowdy Live 1">
+                <img src="band2.jpg" alt="Rowdy Live 2">
+                <img src="band3.jpg" alt="Rowdy Live 3">
+            </div>
         </div>
+
+        <div class="bio-box">
+            Hailing from Derry, Northern Ireland, <strong>Rowdy</strong> are a four-piece post-rock/alternative rock outfit carving out a sound that bridges raw intensity with atmospheric depth. The band blend heavy, driving rhythms with soaring melodies and cinematic textures.
+            <br><br>
+            Drawing influence from the grit and emotion of 70s rock legends like the B-52’s while weaving in the dreamy, modern touches of artists such as Hers and Sorry, Rowdy’s music feels both nostalgic and forward-looking. Their debut singles, <strong>“Rolling”</strong> and <strong>“Tatooine”</strong>, have already made waves locally, showcasing the band’s ability to shift seamlessly between brooding atmospheres and explosive energy.
+            <br><br>
+            Rowdy have headlined multiple shows across Derry, including the Rock for Pride fundraiser, and continue to build momentum with their commanding live performances. With their first full-length album currently in the works and plans to tour in the coming year, Rowdy are poised to establish themselves as one of the most exciting emerging acts from Northern Ireland’s alternative scene.
+        </div>
+
+        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/5uC6b5NisI873zXGskZq7o?utm_source=generator" width="100%" height="152" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
     </div>
 
     <div class="content-panel" id="panel-contact">
         <button class="close-btn" onclick="closePanel('contact')">✕</button>
-        <div class="content-panel-inner">
-            <h2>Contact Us</h2>
-            <p>Reach out to the nexus. We are listening.</p>
+        <div class="flashy-contact">
+            <h2>GET IN TOUCH</h2>
+            <p style="font-size: 1.8rem; margin: 20px 0;">Email: <span style="color: var(--pink)">reecethompsonbusiness@outlook.com</span></p>
+            <a href="https://www.instagram.com/r0wdy_band/" target="_blank" class="insta-btn">FOLLOW @R0WDY_BAND</a>
         </div>
+        <p style="text-align: center; color: white; font-family: 'Bebas Neue'; font-size: 1.5rem; opacity: 0.7;">This section is currently under development</p>
     </div>
 
     <div class="content-panel" id="panel-events">
         <button class="close-btn" onclick="closePanel('events')">✕</button>
-        <div class="content-panel-inner">
-            <h2>Upcoming Events</h2>
-            <p>April 2026: The Eclipse Gathering<br>May 2026: Phantom Protocol</p>
-        </div>
+        <h2 style="font-size: 5rem; color: white; text-align: center; font-family: 'Bebas Neue';">currently under development</h2>
     </div>
 
     <div class="content-panel" id="panel-else">
         <button class="close-btn" onclick="closePanel('else')">✕</button>
-        <div class="content-panel-inner">
-            <h2>Everything Else</h2>
-            <p>Archives, settings, and the void beyond.</p>
-        </div>
+        <h2 style="font-size: 4rem; color: white; text-align: center; font-family: 'Permanent Marker';">Merch Coming soon space cowboys!</h2>
     </div>
 
     <script>
         const menuItems = document.querySelectorAll('.menu-item');
         const selectionBar = document.getElementById('selectionBar');
+        const track = document.getElementById('carouselTrack');
+        let index = 0;
 
+        // Selection Bar Logic
         function updateSelectionBar(item) {
             const rect = item.getBoundingClientRect();
             selectionBar.style.top = (rect.top + rect.height / 2 - 30) + 'px';
@@ -279,41 +222,42 @@
 
         menuItems.forEach((item) => {
             item.addEventListener('mouseenter', () => updateSelectionBar(item));
-
             item.addEventListener('click', (e) => {
                 e.preventDefault();
-                const section = item.dataset.section;
-                openPanel(section);
+                openPanel(item.dataset.section);
             });
         });
 
-        function openPanel(section) {
-            document.getElementById('panel-' + section).classList.add('active');
+        // Panel Controls
+        function openPanel(section) { 
+            document.getElementById('panel-' + section).classList.add('active'); 
+            document.body.style.overflow = 'hidden'; // Stop scrolling main page
+        }
+        function closePanel(section) { 
+            document.getElementById('panel-' + section).classList.remove('active'); 
+            document.body.style.overflow = 'auto'; 
         }
 
-        function closePanel(section) {
-            document.getElementById('panel-' + section).classList.remove('active');
+        // Auto Carousel Logic
+        function moveCarousel() {
+            index++;
+            if (index > 2) index = 0; // Cycles through 3 images
+            track.style.transform = `translateX(-${index * 100}%)`;
         }
+        setInterval(moveCarousel, 3000); // Change image every 3 seconds
 
-        // Mouse trail effect
+        // Mouse Trail
         document.addEventListener('mousemove', (e) => {
             const trail = document.createElement('div');
-            trail.style.cssText = `
-                position: fixed; left: ${e.clientX}px; top: ${e.clientY}px;
-                width: 8px; height: 8px; background: var(--pink);
-                border-radius: 50%; pointer-events: none; z-index: 9999;
-                opacity: 0.6; transform: translate(-50%, -50%);
-                transition: all 0.4s ease;
-            `;
+            trail.className = 'trail';
+            trail.style.left = e.clientX + 'px';
+            trail.style.top = e.clientY + 'px';
             document.body.appendChild(trail);
-            setTimeout(() => {
-                trail.style.opacity = '0';
-                trail.style.transform = 'translate(-50%, -50%) scale(0)';
-            }, 50);
+            setTimeout(() => { trail.style.opacity = '0'; trail.style.transform = 'scale(0)'; }, 50);
             setTimeout(() => trail.remove(), 400);
         });
 
-        // Initialize bar
+        // Init
         updateSelectionBar(menuItems[0]);
     </script>
 </body>
