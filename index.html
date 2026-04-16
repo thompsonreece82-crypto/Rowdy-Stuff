@@ -29,10 +29,10 @@
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -2;
             /* Update 'background.jpg' to your image file name when uploaded */
-            background-image: url('background2.jpg'); 
+            background-image: url('background.jpg'); 
             background-size: cover;
             background-position: center;
-            filter: grayscale(100%) contrast(150%);
+            filter: grayscale(20%) contrast(30%);
         }
 
         .bg-halftone::after {
@@ -40,7 +40,7 @@
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             /* The Halftone Dot Pattern */
-            background-image: radial-gradient(circle, #000 20%, transparent 20%);
+            background-image: radial-gradient(circle, #000 20%, transparent 90%);
             background-size: 4px 4px;
             opacity: 0.4;
             pointer-events: none;
